@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import Logo from './Logo';
 
 const MenuIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg {...props} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -44,9 +45,17 @@ const Header: React.FC = () => {
   return (
     <header className={`fixed top-0 w-full z-50 transition-all duration-300 ease-in-out ${isScrolled ? 'bg-white/95 shadow-md backdrop-blur-sm' : 'bg-white'}`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <nav className="flex justify-between items-center py-4">
-          <NavLink to="/" className="text-xl font-bold text-blue-900" onClick={handleLinkClick}>
-            Impact Nexus Analytics
+        <nav className="flex justify-between items-center py-3">
+          <NavLink 
+            to="/" 
+            className="flex items-center space-x-3" 
+            onClick={handleLinkClick}
+          >
+            <Logo />
+            <span className="font-bold text-lg sm:text-xl text-blue-900 whitespace-nowrap">
+              Impact Nexus
+              <span className="hidden sm:inline"> Analytics</span>
+            </span>
           </NavLink>
 
           <ul className="hidden md:flex items-center space-x-8">
@@ -62,26 +71,36 @@ const Header: React.FC = () => {
             ))}
           </ul>
 
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-gray-800 hover:text-blue-800"
-            >
-              {isMobileMenuOpen ? <CloseIcon className="h-7 w-7" /> : <MenuIcon className="h-7 w-7" />}
-            </button>
-          </div>
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden relative z-50 p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+            aria-label="Toggle menu"
+          >
+            <div className="relative w-6 h-6">
+              <span className={`absolute left-0 block w-full h-0.5 bg-gray-600 transform transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'top-3 rotate-45' : 'top-1'}`}></span>
+              <span className={`absolute left-0 block w-full h-0.5 bg-gray-600 top-3 transition-all duration-200 ${isMobileMenuOpen ? 'opacity-0' : 'opacity-100'}`}></span>
+              <span className={`absolute left-0 block w-full h-0.5 bg-gray-600 transform transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'top-3 -rotate-45' : 'top-5'}`}></span>
+            </div>
+          </button>
         </nav>
       </div>
       
       {/* Mobile Menu */}
-      <div className={`md:hidden absolute top-full left-0 w-full bg-white shadow-lg transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? 'translate-y-0' : '-translate-y-[120%]'}`}>
-          <ul className="flex flex-col items-center p-4 space-y-4">
+      <div className={`md:hidden fixed top-[64px] left-0 w-full h-screen bg-white/95 backdrop-blur-sm shadow-lg transition-all duration-300 ease-in-out transform ${isMobileMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`}>
+        <div className="container mx-auto px-6 py-8">
+          <ul className="flex flex-col space-y-6">
             {navItems.map((item) => (
-              <li key={item.path}>
+              <li key={item.path} className="border-b border-gray-100 pb-4">
                 <NavLink
                   to={item.path}
                   onClick={handleLinkClick}
-                  className={({ isActive }) => `text-lg ${linkClass} ${isActive ? 'text-blue-800 font-semibold' : ''}`}
+                  className={({ isActive }) => `
+                    text-lg block transition-all duration-300 hover:pl-4
+                    ${isActive 
+                      ? 'text-blue-800 font-semibold' 
+                      : 'text-gray-600 hover:text-blue-800'
+                    }
+                  `}
                 >
                   {item.label}
                 </NavLink>
@@ -89,6 +108,7 @@ const Header: React.FC = () => {
             ))}
           </ul>
         </div>
+      </div>
     </header>
   );
 };
