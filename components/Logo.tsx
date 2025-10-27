@@ -1,5 +1,5 @@
 import React from 'react';
-import logoImage from '../src/assets/impact.jpg';
+import logoImage from '../src/assets/impact1.jpg';
 
 const Logo: React.FC = () => {
   return (
