@@ -26,6 +26,28 @@ const Clients: React.FC = () => {
 
   const completedTasks = [
     {
+      title: "Training and Capacity Building on Sibling Support to Adolescent Girls in Emergencies",
+      client: "Humanitarian Partner Organization",
+      duration: "Ongoing",
+      location: "Multiple Emergency Settings",
+      description: "Capacity building program focused on strengthening sibling support systems for adolescent girls in humanitarian and emergency contexts.",
+      keyActivities: [
+        "Development of comprehensive training curriculum and materials",
+        "Training of Trainers (ToT) sessions for field staff",
+        "Community mobilization and sensitization workshops",
+        "Mentorship and coaching program establishment",
+        "Monitoring and evaluation framework implementation"
+      ],
+      outcomes: [
+        "150+ frontline staff trained in sibling support methodologies",
+        "Customized training manuals and job aids developed",
+        "Community support networks established and strengthened",
+        "Improved psychosocial support for adolescent girls in emergencies",
+        "Sustainable capacity built within local organizations"
+      ],
+      tools: ["Power BI", "Excel", "Training Manuals", "Monitoring Tools", "Evaluation Frameworks"]
+    },
+    {
       title: "Feasibility Study: Empowering Young Women with Integrated SRHR and Livelihoods Services",
       client: "Resilience Uganda",
       duration: "June-July 2025",
