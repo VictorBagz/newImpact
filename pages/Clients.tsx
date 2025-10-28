@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useFadeIn } from '../hooks/useFadeIn';
 
@@ -13,6 +12,7 @@ const Clients: React.FC = () => {
     const [targetRef, targetClasses] = useFadeIn<HTMLDivElement>();
     const [donorsRef, donorsClasses] = useFadeIn<HTMLDivElement>();
     const [sectorsRef, sectorsClasses] = useFadeIn<HTMLDivElement>();
+    const [featuredRef, featuredClasses] = useFadeIn<HTMLDivElement>();
     const [approachRef, approachClasses] = useFadeIn<HTMLDivElement>();
 
   const targetClients = [
@@ -23,6 +23,30 @@ const Clients: React.FC = () => {
 
   const donorRequirements = ['USAID', 'DFID', 'BMZ', 'UN Agencies', 'World Bank', 'AfDB'];
   const sectors = ['Health', 'Education', 'Agriculture', 'WASH', 'Climate', 'Governance', 'Economic Dev', 'Humanitarian'];
+
+  const completedTasks = [
+    {
+      title: "Feasibility Study: Empowering Young Women with Integrated SRHR and Livelihoods Services",
+      client: "Resilience Uganda",
+      duration: "June-July 2025",
+      location: "Gulu City",
+      description: "Conducted comprehensive feasibility study for integrated Sexual Reproductive Health and Rights (SRHR) and livelihoods services",
+      keyActivities: [
+        "Stakeholder mapping and engagement with local government and community leaders",
+        "Needs assessment with 300+ young women in Gulu City",
+        "Market analysis for viable livelihood opportunities",
+        "Program design and implementation strategy development",
+        "Partnership assessment and coordination mechanisms"
+      ],
+      outcomes: [
+        "Comprehensive feasibility report with implementation roadmap",
+        "Stakeholder buy-in and commitment secured",
+        "Baseline data for future program monitoring established",
+        "Integrated SRHR-livelihoods model validated with target beneficiaries"
+      ],
+      tools: ["ODK", "Kobo Toolbox", "Excel", "SPSS", "Qualitative Analysis"]
+    }
+  ];
 
   return (
     <div>
@@ -76,6 +100,85 @@ const Clients: React.FC = () => {
             {sectors.map((sector, index) => (
               <div key={index} className="text-center bg-blue-50 p-4 rounded-lg">
                 <p className="font-semibold text-blue-800">{sector}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section ref={featuredRef} className={`py-16 sm:py-24 ${featuredClasses}`}>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-blue-900 text-center">Featured Projects</h2>
+          <p className="mt-4 text-center text-lg text-gray-600 max-w-3xl mx-auto">
+            Recent success stories showcasing our impact across diverse sectors.
+          </p>
+          <div className="mt-12">
+            {completedTasks.map((task, index) => (
+              <div key={index} className="bg-white p-8 rounded-lg shadow-lg border border-gray-200">
+                <div className="flex flex-col space-y-6">
+                  <div>
+                    <h3 className="text-2xl font-bold text-blue-900">{task.title}</h3>
+                    <div className="mt-2 flex flex-wrap gap-4 text-sm text-gray-600">
+                      <span className="flex items-center">
+                        <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                        </svg>
+                        {task.client}
+                      </span>
+                      <span className="flex items-center">
+                        <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        {task.duration}
+                      </span>
+                      <span className="flex items-center">
+                        <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        {task.location}
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <p className="text-gray-700">{task.description}</p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                      <h4 className="text-lg font-semibold text-blue-800 mb-3">Key Activities</h4>
+                      <ul className="space-y-2">
+                        {task.keyActivities.map((activity, idx) => (
+                          <li key={idx} className="flex items-start">
+                            <CheckIcon />
+                            <span>{activity}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-blue-800 mb-3">Outcomes</h4>
+                      <ul className="space-y-2">
+                        {task.outcomes.map((outcome, idx) => (
+                          <li key={idx} className="flex items-start">
+                            <CheckIcon />
+                            <span>{outcome}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="text-lg font-semibold text-blue-800 mb-3">Tools Used</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {task.tools.map((tool, idx) => (
+                        <span key={idx} className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm">
+                          {tool}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
